@@ -1,11 +1,13 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/App-BackEnd-PHP/vendor
-
-# production
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
 /.idea
-
-# misc
-.DS_Store
-npm-debug.log*
+/.vscode
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.env
