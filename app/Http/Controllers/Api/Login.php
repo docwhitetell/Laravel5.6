@@ -15,6 +15,31 @@ class Login extends Controller
 {
     protected $username = "mobile";
     /*处理 api登录 */
+
+    /**
+     * @SWG\Post(path="/api/login",
+     *   tags={"project"},
+     *   summary="提交用户手机号和密码，返回access_token",
+     *   description="登录",
+     *   operationId="",
+     *   produces={"application/json"},
+     *   @SWG\Parameter(
+     *     in="formData",
+     *     name="mobile",
+     *     type="string",
+     *     description="手机号",
+     *     required=true,
+     *   ),
+     *    @SWG\Parameter(
+     *     in="formData",
+     *     name="password",
+     *     type="string",
+     *     description="密码",
+     *     required=true,
+     *   ),
+     *   @SWG\Response(response="default", description="操作成功")
+     * )
+     */
     public function login(Request $request){
         $http = new GuzzleHttp\Client;
         $mobile = $request->get('mobile');
