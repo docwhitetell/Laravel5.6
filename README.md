@@ -4,9 +4,6 @@
 *   增加短信验证码注册渠道
 *   基于laravel/Passport 实现的API登录接口。
 
-
-
-
 ## Install 安装
 * git clone
 * 在根目录下新建 .env文件，复制 .env.example的基础配置到.env中。
