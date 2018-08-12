@@ -21,12 +21,12 @@ class OrderShipped extends Mailable
     /*
      * @var view, viewData, subject(Mail Title)
      * */
-    public function __construct($view, $viewData, $subject="爱到家")
+    public function __construct($view, $viewData, $subject = null)
     {
         //
         $this->view = $view;
         $this->viewData = $viewData;
-        $this->subject = $subject;
+        $this->subject = $subject ? $subject : config('app.email_subject') ;
     }
 
     /**
@@ -36,6 +36,6 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-        return $this->from(['address'=>'master@docwhite.cn', 'name'=>"爱到家"])->view($this->view)->subject($this->subject)->with($this->viewData);
+        return $this->from(['address'=>config('app.email_address'), 'name'=>config('app.name')])->view($this->view)->subject($this->subject)->with($this->viewData);
     }
 }

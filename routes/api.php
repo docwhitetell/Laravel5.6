@@ -27,4 +27,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:api')->put('/user/{id}', 'Api\UserController@UpdateUserInfo');
+Route::middleware('auth:api')->put('/user/{id}', 'Api\UserController@bindUserEmail');

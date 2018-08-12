@@ -38,7 +38,6 @@ class SMSRegisterCodesController extends Controller
         }
         // 生成4位随机数，左侧补0
         $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
-
         try {
             $result = $easySms->send($mobile, [
                 'content' => "【余皓明】您的验证码是{$code}。如非本人操作，请忽略本短信"

@@ -45,7 +45,7 @@ class UserController extends Controller
      * )
      */
     public function bindUserEmail(Request $request,$id){
-        $code = 5201314;
+        $code = str_pad(random_int(1, 999999), 6, 0, STR_PAD_LEFT);
         $flag = Mail::to($request->get('email'))->send(new OrderShipped('emails.EmailCode', ['code'=>$code]));
         if($flag){
             return '发送邮件成功，请查收！';
