@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\ApiController as Controller;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use GuzzleHttp;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Passport\Client;
 use Laravel\Passport\Token;
 use Illuminate\Support\Facades\DB;
-// use Symfony\Component\HttpFoundation\Cookie;
+use Mockery\Exception;
 
-class Login extends Controller
+
+class AuthController extends Controller
 {
-    protected $username = "mobile";
     /*处理 api登录 */
 
     /**
      * @SWG\Post(path="/api/login",
-     *   tags={"project"},
+     *   tags={"User"},
      *   summary="提交用户手机号和密码，返回access_token",
      *   description="登录",
      *   operationId="",
@@ -49,19 +50,25 @@ class Login extends Controller
             // 认证通过...
 /*            $this->cleanExpiresAccessToken();
             $this->cleanExpiresRefreshToken();*/
-            $scopes='*';
-            $response = $http->post(env('APP_URL').'/oauth/token', [
-                'form_params' => [
-                    'grant_type' => 'password',
-                    'client_id' => $passwordClient->id,
-                    'client_secret' => $passwordClient->secret,
-                    'mobile' => $mobile,
-                    'password' =>  $password,
-                    'scope' => $scopes,
-                ],
-            ]);
-            $data=json_decode((string) $response->getBody(), true);
-            return response()->json(['error'=>false,'token'=>$data]);
+            $data = null;
+            try{
+                $response = $http->post(env('APP_URL').'/oauth/token', [
+                    'form_params' => [
+                        'grant_type' => 'password',
+                        'client_id' => $passwordClient->id,
+                        'client_secret' => $passwordClient->secret,
+                        'username' => $mobile,
+                        'password' =>  $password,
+                        'scope' => '*',
+                    ],
+                ]);
+                $data=json_decode((string) $response->getBody(), true);
+            }catch(Exception $e){
+                $msg = $e->getMessage();
+                return ['error'=>true, 'message'=>$msg];
+            }
+
+            return response()->json($data);
         }else{
             return response()->json(['error'=>'Mobile Number or Password not Match!'],200);
         }
@@ -106,5 +113,10 @@ class Login extends Controller
         $expiresTokens = DB::table('oauth_refresh_tokens')->where('expires_at','<',$nowtime)->delete();
     }
 
-
+    public function __construct()
+    {
+        $this->middleware('auth:api')->only([
+            'logout'
+        ]);
+    }
 }

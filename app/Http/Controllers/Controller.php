@@ -17,4 +17,8 @@ use Swagger\Annotations\Info;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+/*    public function username(){
+        return 'mobile';
+    }*/
 }

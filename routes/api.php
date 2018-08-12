@@ -15,10 +15,16 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => ['cors']],function (){
     Route::get('/smsCode', 'SMSRegisterCodesController@getSmsCode')->name('getSmsCode');
     Route::post('/register', 'SMSRegisterCodesController@register')->name('smsRegister');
-    Route::get('/login', 'Api\Login@login');
+    Route::post('/login', 'Api\AuthController@login');
 });
 
+Route::get('/performance', function () {
+    $response = new \App\User();
+    return $response->getUser();
+});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware('auth:api')->put('/user/{id}', 'Api\UserController@UpdateUserInfo');

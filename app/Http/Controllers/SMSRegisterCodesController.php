@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Mockery\Exception;
 use Overtrue\EasySms\EasySms;
 use App\User;
 use PhpParser\Error;
@@ -10,13 +11,31 @@ use Illuminate\Support\Facades\Cache;
 
 class SMSRegisterCodesController extends Controller
 {
-    // 这里验证就不写了。
+    /**
+     * @SWG\Get(path="/api/smsCode",
+     *   tags={"User"},
+     *   summary="获取手机注册验证码",
+     *   description="获取验证码",
+     *   operationId="",
+     *   produces={"application/json"},
+     *   @SWG\Parameter(
+     *     in="path",
+     *     name="mobile",
+     *     type="string",
+     *     description="手机号",
+     *     required=true,
+     *   ),
+     *   @SWG\Response(response="default", description="操作成功")
+     * )
+     */
     public function getSmsCode(Request $request, EasySms $easySms)
     {
-        //获取前端ajax传过来的手机号
-        //dd($request->get('mobile'));
         $mobile = $request->get('mobile');
-
+        $response = null;
+        if(!$mobile){
+            $response = ['error'=> true, 'message' => '手机号为必填!', 'code' => 402 ];
+            return $response;
+        }
         // 生成4位随机数，左侧补0
         $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
 
@@ -42,31 +61,81 @@ class SMSRegisterCodesController extends Controller
         ], 201);
     }
 
+    /**
+     * @SWG\Post(path="/api/register",
+     *   tags={"User"},
+     *   summary="通过手机验证码注册用户",
+     *   description="注册",
+     *   operationId="",
+     *   produces={"application/json"},
+     *   @SWG\Parameter(
+     *     in="formData",
+     *     name="verification_key",
+     *     type="string",
+     *     description="获取验证码步骤中返回的key",
+     *     required=true,
+     *   ),
+     *   @SWG\Parameter(
+     *     in="formData",
+     *     name="verification_code",
+     *     type="string",
+     *     description="手机验证码",
+     *     required=true,
+     *   ),
+     *   @SWG\Parameter(
+     *     in="formData",
+     *     name="mobile",
+     *     type="string",
+     *     description="手机号",
+     *     required=true,
+     *   ),
+     *   @SWG\Parameter(
+     *     in="formData",
+     *     name="password",
+     *     type="string",
+     *     description="用户密码",
+     *     required=true,
+     *   ),
+     *   @SWG\Response(response="default", description="操作成功")
+     * )
+     */
     public function register(Request $request)
     {
-        /*  pull（读取完成后删除）
-         * 从缓存中读取 $verification_key 并清除 ，不存在则返回错误*/
-        $verifyData = Cache::get($request->get('verification_key'));
-        //如果数据不存在，说明验证码已经失效。
-        if(!$verifyData) {
-            return response()->json(['status' =>0, 'message'=> '短信验证码已失效', 'code' => 422], 422);
+        $verificationKey = $request->get('verification_key');
+        $verificationCode = $request->get('verification_code');
+        $response = null;
+        if(!$verificationKey){  // 请求体中是否包含 verification_key
+            $response = ['error' => true, 'message' =>'缺少短信验证码！', 'code' => 400];
+            return $response;
+        }
+        if(!$verificationCode){  // 请求体中是否包含 verification_code （手机验证码）
+            $response = ['error' => true, 'message' =>'缺少verification_key！', 'code' => 400];
+            return $response;
         }
 
-        // 检验前端传过来的验证码是否和缓存中的一致
-        if (!hash_equals($verifyData['code'], $request->verification_code)){
-            return ['error' => true, 'message' =>'短信验证码错误', 'data' => null, 'code' => 422];
-            //return redirect()->back()->with('warning', '短信验证码错误');
+        $verifyData = Cache::get($verificationKey);
+        if(!$verifyData) {  // 缓存中如果没有相应的值则验证码以失效
+            return response()->json(['error' => true, 'message'=> '短信验证码已失效!', 'code' => 400], 400);
         }
 
-        $user = User::create([
-            'name'=> 'User'.str_random(10),
-            'mobile' => $verifyData['mobile'],
-            'password' => bcrypt($request->get('password')),
-        ]);
+        if (!hash_equals($verifyData['code'], $verificationCode)){
+            // 请求体中的 verification_code （手机验证码）是否与缓存中的验证码匹配
+            return ['error' => true, 'message' =>'短信验证码错误!', 'code' => 400];
+        }
 
-        // 清除验证码缓存
-        Cache::forget($request->verification_key);
-        return ['error' => false, 'message' =>'短信验证码错误', 'data' => null, 'code' => 200];
-        //return redirect()->route('login')->with('success', '注册成功！');
+        try{
+            User::create([
+                'name'=> 'User'.str_random(10),
+                'mobile' => $verifyData['mobile'],
+                'password' => bcrypt($request->get('password')),
+            ]);
+            Cache::forget($request->get('verification_key'));
+            $response = ['error'=> false, 'message' => '注册成功！', 'code' => 200];
+        }catch(Exception $e){
+            $msg = $e->getMessage();
+            $response = ['error'=> true, 'message' => $msg, 'code' => 500];
+        }
+
+        return $response;
     }
 }
