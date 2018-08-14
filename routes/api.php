@@ -20,6 +20,7 @@ Route::group(['middleware' => ['cors']],function (){
 
 Route::get('/performance', function () {
     $response = new \App\User();
+    //$response = \swoole_version();
     return $response->getUser();
 });
 

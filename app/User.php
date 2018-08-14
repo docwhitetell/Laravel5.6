@@ -6,6 +6,7 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Mockery\Exception;
 
 class User extends Authenticatable
 {
@@ -45,7 +46,11 @@ class User extends Authenticatable
 
     public function getUser($query=null){
         $response = null;
-        $cache = Cache::store('redis')->get('Users');
+        try{
+            $cache = Cache::store('redis')->get('Users');
+        }catch(Exception $e){
+            $cache = null;
+        }
         if($cache){
             return ['from'=>'redis', 'data'=>$cache, 'memory'=>memory_get_peak_usage()];
         }
