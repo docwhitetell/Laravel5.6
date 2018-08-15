@@ -9,11 +9,18 @@
 * 在根目录下新建 .env文件，复制 .env.example的基础配置到.env中。
 修改APP_URL, 数据库连接设置
 * 执行 composer install   (安装依赖包)
+
 * 执行 php artisan key:generate  （生成APP_KEY）
-* php artisan migrate   (迁移数据表)
-* php artisan passport:install 
+
+* 迁移数据表：<br />
+php artisan migrate   (迁移数据表)
+
+* 生成授权客户端： <br />
+php artisan passport:install 
 
 
+
+## 常用 artisan 命令 ##
 * 生成 Swagger api文档的命令： <br />
 php artisan l5-swagger:generate
 
