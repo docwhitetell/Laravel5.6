@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Api\ApiController as Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use GuzzleHttp;
 use Illuminate\Support\Facades\Auth;
@@ -18,26 +17,9 @@ class AuthController extends Controller
     /*处理 api登录 */
 
     /**
-     * @SWG\Post(path="/api/login",
-     *   tags={"Auth"},
-     *   summary="提交用户手机号和密码，返回access_token",
-     *   description="登录",
-     *   operationId="",
-     *   produces={"application/json"},
-     *   @SWG\Parameter(
-     *     in="formData",
-     *     name="mobile",
-     *     type="string",
-     *     description="手机号",
-     *     required=true,
-     *   ),
-     *    @SWG\Parameter(
-     *     in="formData",
-     *     name="password",
-     *     type="string",
-     *     description="密码",
-     *     required=true,
-     *   ),
+     * @SWG\Post(path="/api/login",tags={"Auth"},summary="提交用户手机号和密码，返回access_token",description="登录",operationId="",produces={"application/json"},
+     *   @SWG\Parameter(in="formData",name="mobile",type="string",description="手机号",required=true),
+     *   @SWG\Parameter(in="formData",name="password",type="string",description="密码",required=true),
      *   @SWG\Response(response="default", description="操作成功")
      * )
      */

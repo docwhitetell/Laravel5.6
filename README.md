@@ -22,8 +22,8 @@ php artisan passport:install
 
 ## 常用 artisan 命令 ##
 * 生成 Swagger api文档的命令： <br />
-php artisan l5-swagger:generate
-
+php artisan l5-swagger:generate <br />
+在线Api文档地址： http://server.com/api/documentation
 * 生成 迁移表命令： <br />
 php artisan make:migrate create_xxx_table
 
