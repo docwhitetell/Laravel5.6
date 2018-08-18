@@ -12,19 +12,8 @@ use Illuminate\Support\Facades\Cache;
 class SMSRegisterCodesController extends Controller
 {
     /**
-     * @SWG\Get(path="/api/smsCode",
-     *   tags={"User"},
-     *   summary="获取手机注册验证码",
-     *   description="获取验证码",
-     *   operationId="",
-     *   produces={"application/json"},
-     *   @SWG\Parameter(
-     *     in="path",
-     *     name="mobile",
-     *     type="string",
-     *     description="手机号",
-     *     required=true,
-     *   ),
+     * @SWG\Get(path="/api/smsCode",tags={"Auth"},summary="获取手机注册验证码",description="获取验证码",operationId="",produces={"application/json"},
+     *   @SWG\Parameter(in="path",name="mobile",type="string",description="手机号",required=true,),
      *   @SWG\Response(response="default", description="操作成功")
      * )
      */
@@ -61,40 +50,11 @@ class SMSRegisterCodesController extends Controller
     }
 
     /**
-     * @SWG\Post(path="/api/register",
-     *   tags={"User"},
-     *   summary="通过手机验证码注册用户",
-     *   description="注册",
-     *   operationId="",
-     *   produces={"application/json"},
-     *   @SWG\Parameter(
-     *     in="formData",
-     *     name="verification_key",
-     *     type="string",
-     *     description="获取验证码步骤中返回的key",
-     *     required=true,
-     *   ),
-     *   @SWG\Parameter(
-     *     in="formData",
-     *     name="verification_code",
-     *     type="string",
-     *     description="手机验证码",
-     *     required=true,
-     *   ),
-     *   @SWG\Parameter(
-     *     in="formData",
-     *     name="mobile",
-     *     type="string",
-     *     description="手机号",
-     *     required=true,
-     *   ),
-     *   @SWG\Parameter(
-     *     in="formData",
-     *     name="password",
-     *     type="string",
-     *     description="用户密码",
-     *     required=true,
-     *   ),
+     * @SWG\Post(path="/api/register",tags={"Auth"},summary="通过手机验证码注册用户",description="注册",operationId="",produces={"application/json"},
+     *   @SWG\Parameter(in="formData",name="verification_key",type="string",description="获取验证码步骤中返回的key",required=true),
+     *   @SWG\Parameter(in="formData",name="verification_code",type="string",description="手机验证码",required=true),
+     *   @SWG\Parameter(in="formData",name="mobile",type="string",description="手机号",required=true),
+     *   @SWG\Parameter(in="formData",name="password",type="string",description="用户密码",required=true),
      *   @SWG\Response(response="default", description="操作成功")
      * )
      */
@@ -104,22 +64,22 @@ class SMSRegisterCodesController extends Controller
         $verificationCode = $request->get('verification_code');
         $response = null;
         if(!$verificationKey){  // 请求体中是否包含 verification_key
-            $response = ['error' => true, 'message' =>'缺少短信验证码！', 'code' => 400];
+            $response = ['error' => true, 'message' =>'缺少短信验证码！', 'status' => 500];
             return $response;
         }
         if(!$verificationCode){  // 请求体中是否包含 verification_code （手机验证码）
-            $response = ['error' => true, 'message' =>'缺少verification_key！', 'code' => 400];
+            $response = ['error' => true, 'message' =>'缺少verification_key！', 'status' => 500];
             return $response;
         }
 
         $verifyData = Cache::get($verificationKey);
         if(!$verifyData) {  // 缓存中如果没有相应的值则验证码以失效
-            return response()->json(['error' => true, 'message'=> '短信验证码已失效!', 'code' => 400], 400);
+            return ['error' => true, 'message'=> '短信验证码已失效!', 'status' => 500];
         }
 
         if (!hash_equals($verifyData['code'], $verificationCode)){
             // 请求体中的 verification_code （手机验证码）是否与缓存中的验证码匹配
-            return ['error' => true, 'message' =>'短信验证码错误!', 'code' => 400];
+            return ['error' => true, 'message' =>'短信验证码错误!', 'status' => 500];
         }
 
         try{
@@ -129,10 +89,10 @@ class SMSRegisterCodesController extends Controller
                 'password' => bcrypt($request->get('password')),
             ]);
             Cache::forget($request->get('verification_key'));
-            $response = ['error'=> false, 'message' => '注册成功！', 'code' => 200];
+            $response = ['error'=> false, 'message' => '注册成功！', 'status' => 200];
         }catch(Exception $e){
             $msg = $e->getMessage();
-            $response = ['error'=> true, 'message' => $msg, 'code' => 500];
+            $response = ['error'=> true, 'message' => $msg, 'status' => 500];
         }
 
         return $response;

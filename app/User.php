@@ -30,9 +30,9 @@ class User extends Authenticatable
      * 将Passport认真方式从验证email+password 改为 mobile+password
      * */
     public function findForPassport($username){
-        filter_var($username, FILTER_VALIDATE_EMAIL)?
-            $credentials['email'] = $username:
-            $credentials['mobile'] = $username;
+        filter_var($username, FILTER_VALIDATE_EMAIL)
+            ? $credentials['email'] = $username
+            : $credentials['mobile'] = $username;
         return self::where($credentials)->first();
     }
     /**
@@ -44,21 +44,22 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getUser($query=null){
-        $response = null;
-        try{
-            $cache = Cache::store('redis')->get('Users');
-        }catch(Exception $e){
-            $cache = null;
-        }
-        if($cache){
-            return ['from'=>'redis', 'data'=>$cache, 'memory'=>memory_get_peak_usage()];
-        }
-        else{
-            $data = $query ? User::where($query)->get() : User::all();
-            Cache::store('redis')->put('Users', $data, now()->addMinutes(10));
-            $response = ['from'=>'database', 'data'=>$data, 'memory'=>memory_get_peak_usage()];
-            return $response;
-        }
+    // 通过Model实例 获得关联表的关联信息，
+    // 如 $user->myInfo;
+    // 并不是 $user->myInfo();
+    /*
+     * 定义 User 和 UserInfo 的关联 */
+    public function myInfo() {
+        return $this->hasOne('App\Models\UserInfo');
+    }
+    /*
+     * 定义 User 和 Wallet 的关联  */
+    public function myWallet() {
+        return $this->hasOne('App\Models\Wallet');
+    }
+    /*
+   * 定义 User 和 Resources 的关联  */
+    public function myResource() {
+        return $this->hasMany('App\Models\Resources');
     }
 }

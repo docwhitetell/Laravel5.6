@@ -21,7 +21,7 @@ class OrderShipped extends Mailable
     /*
      * @var view, viewData, subject(Mail Title)
      * */
-    public function __construct($view, $viewData, $subject = null)
+    public function __construct($view, $viewData, $subject = '')
     {
         //
         $this->view = $view;

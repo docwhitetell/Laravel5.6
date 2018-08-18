@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Passport\Client;
 use Laravel\Passport\Token;
 use Illuminate\Support\Facades\DB;
-use Mockery\Exception;
+use \Exception;
 
 
 class AuthController extends Controller
@@ -19,7 +19,7 @@ class AuthController extends Controller
 
     /**
      * @SWG\Post(path="/api/login",
-     *   tags={"User"},
+     *   tags={"Auth"},
      *   summary="提交用户手机号和密码，返回access_token",
      *   description="登录",
      *   operationId="",

@@ -19,13 +19,22 @@ Route::group(['middleware' => ['cors']],function (){
 });
 
 Route::get('/performance', function () {
-    $response = new \App\User();
-    //$response = \swoole_version();
-    return $response->getUser();
+    $response = \App\User::all();
+    return $response;
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+/*
+ * 授权访问路由 */
+Route::group(['middleware' => ['auth:api','cors']],function (){
+    Route::get('/userinfo', function (Request $request) {
+        return $request->user()->myInfo;
+    });
+    Route::get('/user/bindEmail', 'Api\UserController@getEmailVerifyCode');
+    Route::post('/user/bindEmail', 'Api\UserController@bindEmail');
+    Route::put('/user', 'Api\UserController@update');
+    Route::post('/upload', 'Api\UploadController@upload');
+    Route::post('/uploads', 'Api\UploadController@uploads');
 });
 
-Route::middleware('auth:api')->put('/user/{id}', 'Api\UserController@bindUserEmail');
+
+

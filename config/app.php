@@ -19,7 +19,7 @@ return [
      * 配置 用户查收邮件时看到的邮件发件地址
      * */
     'email_address' => 'master@docwhite.cn',
-    'email_subject' => '白先生',
+    'email_subject' => '爱到家',
     /*
     |--------------------------------------------------------------------------
     | Application Environment
