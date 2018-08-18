@@ -94,10 +94,9 @@ class UserController extends Controller
     }
 
     /**
-     * @SWG\put(path="/api/user", tags={"User"},summary="更新用户信息",description="更新",operationId="",produces={"application/json"},
+     * @SWG\Put(path="/api/user", tags={"User"},summary="更新用户信息",description="更新",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
-     *   @SWG\Parameter(in="formData",name="name",type="string",description="新的用户昵
-     * 称",required=true),
+     *   @SWG\Parameter(in="formData",name="name",type="string",description="新的用户昵称",required=true),
      *   @SWG\Parameter(in="formData",name="avatar",type="number",description="用户头像",required=false),
      *   @SWG\Response(response="default", description="操作成功")
      * )
