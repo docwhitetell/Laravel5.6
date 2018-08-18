@@ -21,8 +21,8 @@ class CreateShopsTable extends Migration
             $table->string('name')->comment('店铺名称');
             $table->string('type')->comment('店铺类型');
             $table->string('description')->nullable()->comment('店铺描述');
-            $table->timestamp('open_at')->comment('开始营业时间');
-            $table->timestamp('close_at')->comment('结束营业时间');
+            $table->timestamp('open_at')->nullable()->comment('开始营业时间');
+            $table->timestamp('close_at')->nullable()->comment('结束营业时间');
             $table->timestamps();
         });
     }
