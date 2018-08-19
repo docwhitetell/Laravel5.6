@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Encore\Admin\Reporter\Reporter;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Testing\HttpException;
@@ -36,7 +37,9 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        parent::report($exception);
+        if ($this->shouldReport($exception)) {
+            Reporter::report($exception);
+        }
     }
 
     /**

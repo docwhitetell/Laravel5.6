@@ -33,7 +33,6 @@ Route::group(['middleware' => ['auth:api','cors']],function (){
     Route::post('/user/bindEmail', 'Api\UserController@bindEmail');
     Route::put('/user', 'Api\UserController@update');
     Route::post('/upload', 'Api\UploadController@upload');
-    Route::post('/uploads', 'Api\UploadController@uploads');
 });
 
 

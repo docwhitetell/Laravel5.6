@@ -63,6 +63,12 @@ return [
             // 文件将上传到public/uploads目录 如果需要浏览器直接访问 请设置成这个
             'root' => public_path('users'),
         ],
+        'admin' => [
+            'driver' => 'local',
+            'root' => public_path('uploads'),
+            'visibility' => 'public',
+            'url' => env('APP_URL').'/uploads',
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
