@@ -21,6 +21,12 @@ php artisan passport:install
 
 
 ## 常用 artisan 命令 ##
+* 生成Model： <br />
+php artisan make:model App\\Models\\xxControoler
+
+* 生成Controller： <br />
+php artisan make:controller App\\namespace\\xxxController --resource --model=Model
+
 * 生成 Swagger api文档的命令： <br />
 php artisan l5-swagger:generate <br />
 在线Api文档地址： http://server.com/api/documentation

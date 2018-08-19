@@ -26,13 +26,31 @@ Route::get('/performance', function () {
 /*
  * 授权访问路由 */
 Route::group(['middleware' => ['auth:api','cors']],function (){
+    /*
+     * User*/
     Route::get('/userinfo', function (Request $request) {
         return $request->user()->myInfo;
     });
     Route::get('/user/bindEmail', 'Api\UserController@getEmailVerifyCode');
     Route::post('/user/bindEmail', 'Api\UserController@bindEmail');
     Route::put('/user', 'Api\UserController@update');
+
+    /*
+     * Upload*/
     Route::post('/upload', 'Api\UploadController@upload');
+
+    /*
+     * Shop*/
+    Route::get('/shop', 'Api\ShopController@index');
+    Route::post('/shop', 'Api\ShopController@add');
+    Route::put('/shop/{id}', 'Api\ShopController@update');
+    Route::delete('/shop/{id}', 'Api\ShopController@delete');
+
+    Route::get('/shop/certify', 'Api\ShopController@certificating');
+    /* 提交审核 */
+    Route::get('/shop/certify/{id}', 'Api\ShopController@certify');
+    /* 取消审核 */
+    Route::delete('/shop/certify/{id}', 'Api\ShopController@uncertify');
 });
 
 

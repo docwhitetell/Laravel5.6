@@ -58,8 +58,13 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Wallet');
     }
     /*
-   * 定义 User 和 Resources 的关联  */
+    * 定义 User 和 Resources 的关联  */
     public function myResource() {
         return $this->hasMany('App\Models\Resources');
+    }
+    /*
+    * 定义 User 和 Resources 的关联  */
+    public function myShops() {
+        return $this->hasMany('App\Models\Shop');
     }
 }

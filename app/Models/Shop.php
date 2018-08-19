@@ -15,11 +15,18 @@ class Shop extends Model
         'type',
         'description',
         'open_at',
-        'close_at'
+        'close_at',
+        'status',
+        'certify'
     ];
+
+    protected $table='shops';
 
 
     public function user(){
         return $this->belongsTo('App\User');
+    }
+    public function certify(){
+        return $this->hasMany('App\Models\ShopCertify');
     }
 }
