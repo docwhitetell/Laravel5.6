@@ -1,0 +1,576 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": " App",
+        "version": "v1.0.0"
+    },
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "\u63d0\u4ea4\u7528\u6237\u624b\u673a\u53f7\u548c\u5bc6\u7801\uff0c\u8fd4\u56deaccess_token",
+                "description": "\u767b\u5f55",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "mobile",
+                        "in": "formData",
+                        "description": "\u624b\u673a\u53f7",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "\u5bc6\u7801",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/api/shop": {
+            "get": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "\u6211\u7684\u5546\u5e97",
+                "description": "\u5546\u5e97\u5217\u8868",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "\u521b\u5efa\u6211\u7684\u5546\u5e97",
+                "description": "\u521b\u5efa\u5546\u5e97",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "\u5546\u5e97\u540d\u79f0",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "logo",
+                        "in": "formData",
+                        "description": "\u7528\u6237\u5934\u50cf",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "location",
+                        "in": "formData",
+                        "description": "\u5e97\u94fa\u4f4d\u7f6e",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "\u5e97\u94fa\u7c7b\u578b",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "description": "\u5546\u5e97\u63cf\u8ff0",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "open_at",
+                        "in": "formData",
+                        "description": "\u5f00\u95e8\u8425\u4e1a\u65f6\u95f4",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "close_at",
+                        "in": "formData",
+                        "description": "\u5173\u95e8\u6253\u70ca\u65f6\u95f4",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/api/shop/{id}": {
+            "put": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "\u66f4\u65b0\u5546\u5e97\u4fe1\u606f",
+                "description": "\u66f4\u65b0\u5546\u5e97\u4fe1\u606f",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content-Type",
+                        "type": "string",
+                        "default": "application/x-www-form-urlencoded"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "\u5546\u5e97\u540d\u79f0",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "logo",
+                        "in": "formData",
+                        "description": "\u7528\u6237\u5934\u50cf",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "location",
+                        "in": "formData",
+                        "description": "\u5e97\u94fa\u4f4d\u7f6e",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "\u5e97\u94fa\u7c7b\u578b",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "description": "\u5546\u5e97\u63cf\u8ff0",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "open_at",
+                        "in": "formData",
+                        "description": "\u5f00\u95e8\u8425\u4e1a\u65f6\u95f4",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "close_at",
+                        "in": "formData",
+                        "description": "\u5173\u95e8\u6253\u70ca\u65f6\u95f4",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "\u5220\u9664\u5546\u5e97",
+                "description": "\u5220\u9664\u5546\u5e97",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/api/shop/certify": {
+            "get": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "\u6211\u7684\u5ba1\u6838",
+                "description": "\u6211\u7684\u5ba1\u6838",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/api/shop/certify/{id}": {
+            "get": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "\u7533\u8bf7\u8425\u4e1a\u5ba1\u6279",
+                "description": "\u7533\u8bf7\u8425\u4e1a\u5ba1\u6279",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "\u5220\u9664\u8425\u4e1a\u5ba1\u6279\u7533\u8bf7",
+                "description": "\u5220\u9664\u8425\u4e1a\u5ba1\u6279\u7533\u8bf7",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/api/upload": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u66f4\u65b0\u7528\u6237\u4fe1\u606f",
+                "description": "\u66f4\u65b0",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "description": "\u7528\u6237\u5934\u50cf",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/api/user/bindEmail": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u83b7\u5f97\u90ae\u7bb1\u9a8c\u8bc1\u7801",
+                "description": "\u90ae\u7bb1\u9a8c\u8bc1\u7801",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "\u90ae\u7bb1",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u7ed1\u5b9a\u90ae\u7bb1",
+                "description": "\u7ed1\u5b9a\u90ae\u7bb1",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "formData",
+                        "description": "\u90ae\u7bb1\u9a8c\u8bc1\u7801",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "\u90ae\u7bb1\u5730\u5740",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "key",
+                        "in": "formData",
+                        "description": "\u4e0a\u4e00\u6b65\u83b7\u53d6\u90ae\u7bb1\u9a8c\u8bc1\u7801\u8fd4\u56de\u7684key",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/api/user": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u66f4\u65b0\u7528\u6237\u4fe1\u606f",
+                "description": "\u66f4\u65b0",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "\u65b0\u7684\u7528\u6237\u6635\u79f0",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "avatar",
+                        "in": "formData",
+                        "description": "\u7528\u6237\u5934\u50cf",
+                        "required": false,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/api/smsCode": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "\u83b7\u53d6\u624b\u673a\u6ce8\u518c\u9a8c\u8bc1\u7801",
+                "description": "\u83b7\u53d6\u9a8c\u8bc1\u7801",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "mobile",
+                        "in": "path",
+                        "description": "\u624b\u673a\u53f7",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "\u901a\u8fc7\u624b\u673a\u9a8c\u8bc1\u7801\u6ce8\u518c\u7528\u6237",
+                "description": "\u6ce8\u518c",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "verification_key",
+                        "in": "formData",
+                        "description": "\u83b7\u53d6\u9a8c\u8bc1\u7801\u6b65\u9aa4\u4e2d\u8fd4\u56de\u7684key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "verification_code",
+                        "in": "formData",
+                        "description": "\u624b\u673a\u9a8c\u8bc1\u7801",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "mobile",
+                        "in": "formData",
+                        "description": "\u624b\u673a\u53f7",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "\u7528\u6237\u5bc6\u7801",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}
