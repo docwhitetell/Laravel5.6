@@ -53,6 +53,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\UserInfo');
     }
     /*
+     * 定义 User 和 实名认证 的关联 */
+    public function myCertify() {
+        return $this->hasOne('App\Models\UserCertify');
+    }
+    /*
      * 定义 User 和 Wallet 的关联  */
     public function myWallet() {
         return $this->hasOne('App\Models\Wallet');

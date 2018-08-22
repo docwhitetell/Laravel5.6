@@ -141,6 +141,38 @@
             }
         },
         "/api/shop/{id}": {
+            "get": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "\u5546\u5e97\u8be6\u60c5",
+                "description": "\u5546\u5e97\u8be6\u60c5",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            },
             "put": {
                 "tags": [
                     "Shop"
@@ -346,6 +378,159 @@
                         "description": "id",
                         "required": true,
                         "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/api/shop/{shop_id}/goods": {
+            "post": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "\u521b\u5efa\u6211\u7684\u5546\u5e97",
+                "description": "\u521b\u5efa\u5546\u5e97",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u5546\u5e97id",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u540d\u79f0",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "main_pic",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u4e3b\u56fe",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "big_pic",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u5927\u56fe",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u63cf\u8ff0",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "content",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u8be6\u60c5",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u72b6\u6001",
+                        "required": true,
+                        "type": "string",
+                        "default": "\u6b63\u5e38"
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u7c7b\u578b",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tag",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u6807\u7b7e",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "price",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u4ef7\u683c",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "stock",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u5e93\u5b58",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "discount_price",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u6298\u6263\u4ef7\u683c",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/api/shop/{shop_id}/goods/{goods_id}": {
+            "delete": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "\u521b\u5efa\u6211\u7684\u5546\u5e97",
+                "description": "\u521b\u5efa\u5546\u5e97",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "shop_id",
+                        "in": "path",
+                        "description": "\u5546\u5e97id",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "goods_id",
+                        "in": "path",
+                        "description": "\u5546\u5e97id",
+                        "required": true,
+                        "type": "number"
                     }
                 ],
                 "responses": {

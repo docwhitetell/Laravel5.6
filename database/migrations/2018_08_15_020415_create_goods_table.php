@@ -21,7 +21,8 @@ class CreateGoodsTable extends Migration
             $table->string('big_pic')->nullable()->comment('商品大图');
             $table->mediumText('description')->nullable()->comment('描述');
             $table->longText('content')->nullable()->comment('商品详情');
-            $table->string('type')->comment('商品类型');
+            $table->enum('status',['售尽','下架','正常'])->default('正常')->comment();
+            $table->string('type')->comment('商品分类');
             $table->string('tag')->nullable()->comment('商品标签');
             $table->double('price',15, 2)->comment('商品价格');
             $table->integer('stock')->default(0)->comment('商品库存数量');

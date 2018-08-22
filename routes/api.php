@@ -43,8 +43,17 @@ Route::group(['middleware' => ['auth:api','cors']],function (){
      * Shop*/
     Route::get('/shop', 'Api\ShopController@index');
     Route::post('/shop', 'Api\ShopController@add');
+    Route::get('/shop/{id}', 'Api\ShopController@detail');
     Route::put('/shop/{id}', 'Api\ShopController@update');
     Route::delete('/shop/{id}', 'Api\ShopController@delete');
+    /*
+     * 商铺商品列表 */
+    Route::get('/shop/{id}/goods', 'Api\ShopController@goods');
+
+    Route::post('/shop/{id}/goods', 'Api\ShopController@createGoods');
+    Route::get('/shop/{shop_id}/goods/{goods_id}', 'Api\ShopController@goodsDetail');
+    Route::put('/shop/{shop_id}/goods/{goods_id}', 'Api\ShopController@updateGoods');
+    Route::delete('/shop/{shop_id}/goods/{goods_id}', 'Api\ShopController@deleteGoods');
 
     Route::get('/shop/certify', 'Api\ShopController@certificating');
     /* 提交审核 */

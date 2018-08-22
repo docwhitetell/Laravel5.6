@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Message as ApiMsg;
 use App\Http\Controllers\Controller;
 use App\Mail\OrderShipped;
 use App\Models\UserInfo;
@@ -16,6 +17,7 @@ use \Exception;
 
 class UserController extends Controller
 {
+    use ApiMsg;
     /* 获得 Email 验证码  */
     private $code_length = 6;
 

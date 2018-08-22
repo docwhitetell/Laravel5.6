@@ -29,4 +29,7 @@ class Shop extends Model
     public function certify(){
         return $this->hasMany('App\Models\ShopCertify');
     }
+    public function goods(){
+        return $this->hasMany('App\Models\Goods');
+    }
 }
