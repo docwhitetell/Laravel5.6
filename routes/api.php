@@ -48,12 +48,11 @@ Route::group(['middleware' => ['auth:api','cors']],function (){
     Route::delete('/shop/{id}', 'Api\ShopController@delete');
     /*
      * 商铺商品列表 */
-    Route::get('/shop/{id}/goods', 'Api\ShopController@goods');
-
-    Route::post('/shop/{id}/goods', 'Api\ShopController@createGoods');
-    Route::get('/shop/{shop_id}/goods/{goods_id}', 'Api\ShopController@goodsDetail');
-    Route::put('/shop/{shop_id}/goods/{goods_id}', 'Api\ShopController@updateGoods');
-    Route::delete('/shop/{shop_id}/goods/{goods_id}', 'Api\ShopController@deleteGoods');
+    Route::get('/shop/{id}/goods', 'Api\GoodsController@index');
+    Route::post('/shop/{id}/goods', 'Api\GoodsController@create');
+    Route::get('/shop/{shop_id}/goods/{goods_id}', 'Api\GoodsController@detail');
+    Route::put('/shop/{shop_id}/goods/{goods_id}', 'Api\GoodsController@update');
+    Route::delete('/shop/{shop_id}/goods/{goods_id}', 'Api\GoodsController@delete');
 
     Route::get('/shop/certify', 'Api\ShopController@certificating');
     /* 提交审核 */
