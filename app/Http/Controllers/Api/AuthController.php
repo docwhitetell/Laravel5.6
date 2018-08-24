@@ -24,7 +24,7 @@ class AuthController extends Controller
      * )
      */
     public function login(Request $request){
-        return '123';
+        // return '123';
         $http = new GuzzleHttp\Client;
         $mobile = $request->get('mobile');
         $password = $request->get('password');
