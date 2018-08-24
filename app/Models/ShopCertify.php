@@ -18,7 +18,10 @@ class ShopCertify extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
-    public function certify(){
+/*    public function certify(){
         return $this->hasMany('App\Models\ShopCertify');
+    }*/
+    public function shop(){
+        return $this->belongsTo('App\Models\Shop');
     }
 }

@@ -24,7 +24,8 @@
         "laravel/tinker": "^1.0",
         "overtrue/easy-sms": "^1.1",
         "predis/predis": "^1.1",
-        "swooletw/laravel-swoole": "^2.4"
+        "swooletw/laravel-swoole": "^2.4",
+        "tom-lingham/searchy": "^2.0"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

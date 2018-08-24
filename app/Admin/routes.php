@@ -12,4 +12,7 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
     $router->resource('/front/users', 'UserController');
+    $router->resource('/shop/manager', 'ShopManagerController');
+    $router->resource('/shop/auditing', 'ShopAuditController');
+    $router->post('/shop/auditing/approved', 'ShopAuditController@approved');
 });

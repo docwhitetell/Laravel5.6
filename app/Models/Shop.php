@@ -26,7 +26,7 @@ class Shop extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
-    public function certify(){
+    public function certificating(){
         return $this->hasMany('App\Models\ShopCertify');
     }
     public function goods(){

@@ -26,15 +26,15 @@ class SMSRegisterCodesController extends Controller
             return $response;
         }
         // 生成4位随机数，左侧补0
-        $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
-        try {
+        $code = str_pad(random_int(1, 999999), 6, 0, STR_PAD_LEFT);
+        /*try {
             $result = $easySms->send($mobile, [
                 'content' => "【余皓明】您的验证码是{$code}。如非本人操作，请忽略本短信"
             ]);
         } catch (Overtrue\EasySms\Exceptions\NoGatewayAvailableException $exception) {
             $response = $exception->getExceptions();
             return response()->json($response);
-        }
+        }*/
 
         //生成一个不重复的key 用来搭配缓存cache判断是否过期
         $key = 'verificationCode_' . str_random(15);
@@ -45,6 +45,7 @@ class SMSRegisterCodesController extends Controller
         //dd(Cache::get($key));
         return response()->json([
             'key' => $key,
+            'code'=> $code,
             'expired_at' => $expiredAt->toDateTimeString(),
         ], 201);
     }
