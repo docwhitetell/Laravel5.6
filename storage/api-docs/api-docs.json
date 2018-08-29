@@ -95,7 +95,7 @@
                         "in": "header",
                         "description": "Content-Type",
                         "type": "string",
-                        "default": "application/x-www-form-urlencoded"
+                        "default": "application/json"
                     },
                     {
                         "name": "id",
@@ -206,6 +206,13 @@
                         "description": "Token",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content-Type",
+                        "type": "string",
+                        "default": "application/json"
                     },
                     {
                         "name": "id",
@@ -320,6 +327,13 @@
                         "type": "string"
                     },
                     {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content-Type",
+                        "type": "string",
+                        "default": "application/json"
+                    },
+                    {
                         "name": "shop_id",
                         "in": "path",
                         "description": "\u5546\u5e97id",
@@ -371,6 +385,33 @@
                         "description": "\u5546\u5e97id",
                         "required": true,
                         "type": "number"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/api/user/shopcar": {
+            "get": {
+                "tags": [
+                    "Shop \u5546\u5e97\u7c7bApi"
+                ],
+                "summary": "\u6211\u7684\u5546\u5e97",
+                "description": "\u5546\u5e97\u5217\u8868",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -883,7 +924,7 @@
                 "parameters": [
                     {
                         "name": "mobile",
-                        "in": "path",
+                        "in": "query",
                         "description": "\u624b\u673a\u53f7",
                         "required": true,
                         "type": "string"

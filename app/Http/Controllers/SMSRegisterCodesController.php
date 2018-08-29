@@ -15,7 +15,7 @@ class SMSRegisterCodesController extends Controller
     use Message;
     /**
      * @SWG\Get(path="/api/smsCode",tags={"Auth"},summary="获取手机注册验证码",description="获取验证码",operationId="",produces={"application/json"},
-     *   @SWG\Parameter(in="path",name="mobile",type="string",description="手机号",required=true,),
+     *   @SWG\Parameter(in="query",name="mobile",type="string",description="手机号",required=true,),
      *   @SWG\Response(response="default", description="操作成功")
      * )
      */
@@ -81,8 +81,8 @@ class SMSRegisterCodesController extends Controller
         }
         if(!$verificationCode){  // 请求体中是否包含 verification_code （手机验证码）
             return $this->sendErrorMsg('缺少verification_key！');
-            $response = ['error' => true, 'message' =>'缺少verification_key！', 'status' => 500];
-            return $response;
+            //$response = ['error' => true, 'message' =>'缺少verification_key！', 'status' => 500];
+            //return $response;
         }
 
         $verifyData = Cache::get($verificationKey);
@@ -112,6 +112,6 @@ class SMSRegisterCodesController extends Controller
             //$response = ['error'=> true, 'message' => $msg, 'status' => 500];
         }
 
-        return $response;
+        //return $response;
     }
 }
