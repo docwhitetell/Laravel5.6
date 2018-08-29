@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\Message as ApiMsg;
 use App\Models\Goods;
 use App\Models\Shop;
+use App\Models\ShopCar;
 use App\Models\ShopCertify;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ class ShopCarController extends Controller
     /**
      * @SWG\Get(path="/api/user/shopcar", tags={"Shop 商店类Api"},summary="我的商店",description="商店列表",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
      *   @SWG\Response(response="default", description="操作成功")
      * )
      */
@@ -54,24 +56,49 @@ class ShopCarController extends Controller
         return $this->sendSuccessMsg('', $goods);
     }
 
+    /*
+    * 更新购物车列表 */
+    /**
+     * @SWG\Post(path="/api/user/shopcar", tags={"Shop 商店类Api"},summary="我的商店",description="商店列表",operationId="",produces={"application/json"},
+     *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
+     *   @SWG\Response(response="default", description="操作成功")
+     * )
+     */
+    public function update(Request $request){
+        $user = $request->user();
+        if(empty($request->get('goods'))){
+            return $this->sendErrorMsg('goods字段为空或字段不存在！');
+        }
 
-    public function add(Request $request){
         $data = $request->all();
-        //$data['goods']= json_encode($data['goods']);
+        $data['goods']=json_encode($data['goods']);
         $validator =  Validator::make(
-            $data,
+            $request->all(),
             [
-                'goods'=>'required|json'
+                'goods'=>'required|array'
             ],
             [
-                "name.required"=>'商品名不能为空！',
+                "goods.required"=>'无修改！',
+                "goods.json"=>'数据格式必须json！',
             ]);
-
         if($validator->fails()){
-            return $validator->errors();
+            return $this->sendValidateErrorMsg($validator);
         }
-        //return $goodsIds;
-    }
 
+        if(count($user->myShopCar) === 0){
+            $myShopCar = new ShopCar(['user_id'=>$user->id]);
+        }else{
+            $myShopCar = $user->myShopCar;
+        }
+        try{
+            $myShopCar->goods_ids = $data['goods'];
+            $user->myShopCar()->save($myShopCar);
+            return $this->sendSuccessMsg('购物车修改成功！');
+        }
+        catch (Exception $e){
+            return $this->sendSuccessMsg($e);
+        }
+    }
 
 }

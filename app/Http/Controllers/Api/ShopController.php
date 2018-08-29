@@ -22,6 +22,7 @@ class ShopController extends Controller
     /**
      * @SWG\Get(path="/api/shop", tags={"Shop 商店类Api"},summary="我的商店",description="商店列表",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
      *   @SWG\Response(response="default", description="操作成功")
      * )
      */
@@ -38,6 +39,7 @@ class ShopController extends Controller
     /**
      * @SWG\Post(path="/api/shop", tags={"Shop 商店类Api"},summary="创建我的商店",description="创建商店",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
      *   @SWG\Parameter(in="formData",name="name",type="string",description="商店名称",required=true),
      *   @SWG\Parameter(in="formData",name="logo",type="string",description="用户头像",required=true),
      *   @SWG\Parameter(in="formData",name="location",type="string",description="店铺位置",required=true),
@@ -70,7 +72,7 @@ class ShopController extends Controller
     /**
      * @SWG\Put(path="/api/shop/{id}", tags={"Shop 商店类Api"},summary="更新商店信息",description="更新商店信息",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
-     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content-Type",default="application/x-www-form-urlencoded"),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
      *   @SWG\Parameter(in="path",name="id",type="string",description="id",required=true),
      *   @SWG\Parameter(in="formData",name="name",type="string",description="商店名称",required=true),
      *   @SWG\Parameter(in="formData",name="logo",type="string",description="用户头像",required=true),
@@ -111,6 +113,7 @@ class ShopController extends Controller
     /**
      * @SWG\Delete(path="/api/shop/{id}", tags={"Shop 商店类Api"},summary="删除商店",description="删除商店",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
      *   @SWG\Parameter(in="path",name="id",type="string",description="id",required=true),
      *   @SWG\Response(response="default", description="操作成功")
      * )
@@ -136,6 +139,7 @@ class ShopController extends Controller
     /**
      * @SWG\Get(path="/api/shop/{id}", tags={"Shop 商店类Api"},summary="商店详情",description="商店详情",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
      *   @SWG\Parameter(in="path",name="id",type="string",description="id",required=true),
      *   @SWG\Response(response="default", description="操作成功")
      * )
@@ -151,6 +155,7 @@ class ShopController extends Controller
     /**
      * @SWG\Get(path="/api/shop/certify", tags={"Shop 商店类Api"},summary="我的审核",description="我的审核",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
      *   @SWG\Response(response="default", description="操作成功")
      * )
      */
@@ -169,6 +174,7 @@ class ShopController extends Controller
     /**
      * @SWG\Get(path="/api/shop/certify/{id}", tags={"Shop 商店类Api"},summary="申请营业审批",description="申请营业审批",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
      *   @SWG\Parameter(in="path",name="id",type="string",description="id",required=true),
      *   @SWG\Response(response="default", description="操作成功")
      * )
@@ -210,6 +216,7 @@ class ShopController extends Controller
     /**
      * @SWG\Delete(path="/api/shop/certify/{id}", tags={"Shop 商店类Api"},summary="删除营业审批申请",description="删除营业审批申请",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
      *   @SWG\Parameter(in="path",name="id",type="string",description="id",required=true),
      *   @SWG\Response(response="default", description="操作成功")
      * )

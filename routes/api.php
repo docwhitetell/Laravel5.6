@@ -62,7 +62,7 @@ Route::group(['middleware' => ['auth:api','cors']],function (){
     /*
      * 购物车*/
     Route::get('/user/shopcar', 'Api\ShopCarController@index');
-    Route::post('/user/shopcar', 'Api\ShopCarController@add');
+    Route::post('/user/shopcar', 'Api\ShopCarController@update');
 
 });
 

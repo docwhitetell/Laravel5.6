@@ -7,7 +7,12 @@ use Illuminate\Support\Facades\Validator;
 trait Message
 {
     function sendValidateErrorMsg($validator){
-        return ['error'=>true, 'data'=> null, 'message'=>$validator->errors()];
+        $firstError = current($validator->errors());
+        $errMsg = '';
+        foreach($firstError as $key=>$value){
+            $errMsg = current($value);
+        }
+        return ['error'=>true, 'data'=> null, 'message'=>$errMsg];
     }
 
     function sendSqlErrorMsg($e){

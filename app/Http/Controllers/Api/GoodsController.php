@@ -22,6 +22,7 @@ class GoodsController extends Controller
     /**
      * @SWG\Get(path="/api/shop/{shop_id}/goods", tags={"Goods 商品类Api"},summary="商铺商品列表",description="商铺商品列表",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",required=true,default="application/json"),
      *   @SWG\Parameter(in="path",name="shop_id",type="number",description="商店id",required=true),
      *   @SWG\Response(response="default", description="操作成功")
      * )
@@ -37,7 +38,7 @@ class GoodsController extends Controller
     /**
      * @SWG\Get(path="/api/shop/{shop_id}/goods/{goods_id}", tags={"Goods 商品类Api"},summary="商品详情",description="商品详情",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
-     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content-Type",default="application/json"),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",required=true,default="application/json"),
      *   @SWG\Parameter(in="path",name="shop_id",type="number",description="商店id",required=true),
      *   @SWG\Parameter(in="path",name="goods_id",type="number",description="商品id",required=true),
      *   @SWG\Response(response="default", description="操作成功")
@@ -54,7 +55,7 @@ class GoodsController extends Controller
     /**
      * @SWG\Post(path="/api/shop/{shop_id}/goods", tags={"Goods 商品类Api"},summary="添加商品",description="添加商品",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
-     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content-Type",default="application/json"),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",required=true,default="application/json"),
      *   @SWG\Parameter(in="path",name="id",type="number",description="商店id",required=true),
      *   @SWG\Parameter(in="formData",name="name",type="string",description="商品名称",required=true),
      *   @SWG\Parameter(in="formData",name="main_pic",type="string",description="商品主图",required=true),
@@ -102,7 +103,7 @@ class GoodsController extends Controller
     /**
      * @SWG\Put(path="/api/shop/{shop_id}/goods", tags={"Goods 商品类Api"},summary="更新商品",description="更新商品",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
-     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content-Type",default="application/json"),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",required=true, default="application/json"),
      *   @SWG\Parameter(in="path",name="id",type="number",description="商店id",required=true),
      *   @SWG\Parameter(in="formData",name="name",type="string",description="商品名称",required=true),
      *   @SWG\Parameter(in="formData",name="main_pic",type="string",description="商品主图",required=true),
@@ -150,6 +151,7 @@ class GoodsController extends Controller
     /**
      * @SWG\Delete(path="/api/shop/{shop_id}/goods/{goods_id}", tags={"Goods 商品类Api"},summary="删除商品",description="删除商品",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
      *   @SWG\Parameter(in="path",name="shop_id",type="number",description="商店id",required=true),
      *   @SWG\Parameter(in="path",name="goods_id",type="number",description="商店id",required=true),
      *   @SWG\Response(response="default", description="操作成功")

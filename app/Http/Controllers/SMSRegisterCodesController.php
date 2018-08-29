@@ -7,6 +7,7 @@ use Mockery\Exception;
 use Overtrue\EasySms\EasySms;
 use App\User;
 use PhpParser\Error;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Api\Message;
 
@@ -25,8 +26,6 @@ class SMSRegisterCodesController extends Controller
         $response = null;
         if(!$mobile){
             return $this->sendErrorMsg('手机号为必填!');
-            //$response = ['error'=> true, 'message' => '手机号为必填!', 'code' => 402 ];
-            //return $response;
         }
         // 生成4位随机数，左侧补0
         $code = str_pad(random_int(1, 999999), 6, 0, STR_PAD_LEFT);
@@ -45,19 +44,12 @@ class SMSRegisterCodesController extends Controller
 
         // 缓存验证码 10 分钟过期。
         Cache::put($key, ['mobile' => $mobile, 'code'=> $code], $expiredAt);
-        //dd(Cache::get($key));
         $data = [
             'key' => $key,
             'code'=> $code,
             'expired_at' => $expiredAt->toDateTimeString()
         ];
-        return $this->sendSuccessMsg('成功！',$data );
-    /*    return response()->json([
-            'error'=> false,
-            'key' => $key,
-            'code'=> $code,
-            'expired_at' => $expiredAt->toDateTimeString(),
-        ], 201);*/
+        return $this->sendSuccessMsg('短信发送成功！验证码10分钟内有效！',$data );
     }
 
     /**
@@ -71,32 +63,32 @@ class SMSRegisterCodesController extends Controller
      */
     public function register(Request $request)
     {
+        $validator = $this->UserValidator($request->all());
+        if($validator->fails()){
+            return $this->sendValidateErrorMsg($validator);
+        }
         $verificationKey = $request->get('verification_key');
         $verificationCode = $request->get('verification_code');
         $response = null;
         if(!$verificationKey){  // 请求体中是否包含 verification_key
-            //$response = ['error' => true, 'message' =>'缺少短信验证码！', 'status' => 500];
             return $this->sendErrorMsg('缺少短信验证码！');
-            //return $response;
         }
         if(!$verificationCode){  // 请求体中是否包含 verification_code （手机验证码）
             return $this->sendErrorMsg('缺少verification_key！');
-            //$response = ['error' => true, 'message' =>'缺少verification_key！', 'status' => 500];
-            //return $response;
         }
 
         $verifyData = Cache::get($verificationKey);
+
         if(!$verifyData) {  // 缓存中如果没有相应的值则验证码以失效
             return $this->sendErrorMsg('短信验证码已失效!');
-            //return ['error' => true, 'message'=> '短信验证码已失效!', 'status' => 500];
         }
 
         if (!hash_equals($verifyData['code'], $verificationCode)){
-            // 请求体中的 verification_code （手机验证码）是否与缓存中的验证码匹配
             return $this->sendErrorMsg('短信验证码错误!');
-            //return ['error' => true, 'message' =>'短信验证码错误!', 'status' => 500];
         }
-
+        if (!hash_equals($verifyData['mobile'], $request->get('mobile'))){
+            return $this->sendErrorMsg('前后手机号不一致!');
+        }
         try{
             User::create([
                 'name'=> 'User'.str_random(10),
@@ -105,13 +97,32 @@ class SMSRegisterCodesController extends Controller
             ]);
             Cache::forget($request->get('verification_key'));
             return $this->sendSuccessMsg('注册成功');
-            //$response = ['error'=> false, 'message' => '注册成功！', 'status' => 200];
         }catch(Exception $e){
             $msg = $e->getMessage();
             return $this->sendErrorMsg($msg);
-            //$response = ['error'=> true, 'message' => $msg, 'status' => 500];
         }
-
-        //return $response;
     }
+
+    public function UserValidator(array $data)
+    {
+        return Validator::make(
+            $data,
+            [
+                'mobile' => 'required|unique:users',
+                'password' => 'required|min:6|max:24',
+                'verification_code' => 'required',
+                'verification_key' => 'required'
+            ],
+            [
+                "mobile.required" => '手机号不能为空！',
+                "mobile.unique" => '该号码已被注册！',
+                "password.required" => "密码不得为空！并且长度大于等于6位，小于等于24位！",
+                "password.min" => "密码长度不得少于6位！",
+                "password.max" => "密码长度不得大于24位",
+                "verification_code.required" => '请输入正确的验证码！',
+                'verification_key.required' => 'Key值不存在！'
+            ]);
+    }
+
+
 }

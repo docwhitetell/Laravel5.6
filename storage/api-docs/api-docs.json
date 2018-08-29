@@ -18,6 +18,13 @@
                 ],
                 "parameters": [
                     {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
+                    },
+                    {
                         "name": "mobile",
                         "in": "formData",
                         "description": "\u624b\u673a\u53f7",
@@ -59,6 +66,13 @@
                         "type": "string"
                     },
                     {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
+                    },
+                    {
                         "name": "shop_id",
                         "in": "path",
                         "description": "\u5546\u5e97id",
@@ -93,7 +107,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Content-Type",
+                        "required": true,
                         "type": "string",
                         "default": "application/json"
                     },
@@ -210,7 +224,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Content-Type",
+                        "required": true,
                         "type": "string",
                         "default": "application/json"
                     },
@@ -329,7 +343,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Content-Type",
+                        "required": true,
                         "type": "string",
                         "default": "application/json"
                     },
@@ -373,6 +387,14 @@
                         "type": "string"
                     },
                     {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content_type",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
+                    },
+                    {
                         "name": "shop_id",
                         "in": "path",
                         "description": "\u5546\u5e97id",
@@ -412,6 +434,47 @@
                         "description": "Token",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content_type",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Shop \u5546\u5e97\u7c7bApi"
+                ],
+                "summary": "\u6211\u7684\u5546\u5e97",
+                "description": "\u5546\u5e97\u5217\u8868",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content_type",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
                     }
                 ],
                 "responses": {
@@ -439,6 +502,14 @@
                         "description": "Token",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content_type",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
                     }
                 ],
                 "responses": {
@@ -464,6 +535,14 @@
                         "description": "Token",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content_type",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
                     },
                     {
                         "name": "name",
@@ -542,6 +621,14 @@
                         "type": "string"
                     },
                     {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content_type",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "description": "id",
@@ -576,9 +663,10 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Content-Type",
+                        "description": "Content_type",
+                        "required": true,
                         "type": "string",
-                        "default": "application/x-www-form-urlencoded"
+                        "default": "application/json"
                     },
                     {
                         "name": "id",
@@ -662,6 +750,14 @@
                         "type": "string"
                     },
                     {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content_type",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "description": "id",
@@ -694,6 +790,14 @@
                         "description": "Token",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content_type",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
                     }
                 ],
                 "responses": {
@@ -721,6 +825,14 @@
                         "description": "Token",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content_type",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
                     },
                     {
                         "name": "id",
@@ -753,6 +865,14 @@
                         "description": "Token",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content_type",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
                     },
                     {
                         "name": "id",
@@ -816,6 +936,20 @@
                 ],
                 "parameters": [
                     {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
+                    },
+                    {
                         "name": "email",
                         "in": "path",
                         "description": "\u90ae\u7bb1",
@@ -840,6 +974,20 @@
                     "application/json"
                 ],
                 "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
+                    },
                     {
                         "name": "code",
                         "in": "formData",
@@ -887,6 +1035,13 @@
                         "description": "Token",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
                     },
                     {
                         "name": "name",
