@@ -23,7 +23,7 @@ class CreateShopsTable extends Migration
             $table->string('description')->nullable()->comment('店铺描述');
             $table->string('open_at', 10)->nullable()->default('9:00')->comment('开始营业时间');
             $table->string('close_at',10)->nullable()->default('22:00')->comment('结束营业时间');
-            $table->enum('status', ['close'=>'打烊了','open'=>'营业中'])->default('打烊了');
+            $table->enum('status', ['close'=>'打烊了','open'=>'营业中','null'=>''])->default('');
             $table->enum('certify', ['failure'=>'未审核','being_audited'=>'正在审核','pass_audited'=>'通过审核'])->default('未审核');
             $table->boolean('editable')->default(true);
             $table->timestamps();

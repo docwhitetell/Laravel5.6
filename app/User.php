@@ -72,4 +72,8 @@ class User extends Authenticatable
     public function myShops() {
         return $this->hasMany('App\Models\Shop');
     }
+
+    public function myShopCar(){
+        return $this->hasOne('App\Models\ShopCar');
+    }
 }

@@ -18,7 +18,7 @@ class CreateGoodsTable extends Migration
             $table->integer('shop_id')->comment('店铺id');
             $table->string('name')->comment('商品名称');
             $table->string('main_pic')->default('default_goods_main_pic.png')->comment('商品图');
-            $table->mediumText('media')->nullable()->comment('商品图片集');
+            $table->json('media')->nullable()->comment('商品图片集');
             $table->mediumText('description')->nullable()->comment('描述');
             $table->longText('content')->nullable()->comment('商品详情');
             $table->enum('status',['售尽','下架','正常'])->default('正常')->comment();

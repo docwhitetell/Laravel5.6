@@ -19,14 +19,16 @@ class Shop extends Model
         'status',
         'certify'
     ];
-
+    protected $hidden = [
+        'user_id'
+    ];
     protected $table='shops';
 
 
     public function user(){
         return $this->belongsTo('App\User');
     }
-    public function certificating(){
+    public function certification(){
         return $this->hasMany('App\Models\ShopCertify');
     }
     public function goods(){

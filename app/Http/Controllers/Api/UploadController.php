@@ -34,7 +34,7 @@ class UploadController extends Controller
         $resource->file_size = $file->getSize();
         $resource->type = $file->getClientMimeType();
         $resource->ext = $file->getClientOriginalExtension();
-        $resource->path = env('APP_URL'). $user->id . '/' . $path;
+        $resource->path ='/users/' . $path;
         $data['link'] = $resource->path;
         try{
             $resource->save();
@@ -42,6 +42,5 @@ class UploadController extends Controller
         }catch (Exception $e){
             return ['error'=>false, 'message'=>$e->getMessage(), 'status'=>500];
         }
-
     }
 }

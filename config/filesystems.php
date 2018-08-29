@@ -56,18 +56,15 @@ return [
         ],
         'uploads' => [
             'driver' => 'local',
-
-            // 文件将上传到storage/app/uploads目录
-            //'root' => storage_path('app/uploads'),
-
-            // 文件将上传到public/uploads目录 如果需要浏览器直接访问 请设置成这个
-            'root' => public_path('users'),
+            'root' => storage_path('app/public/users/'),
+            "url"=> env('APP_URL').'/storage/users/',
+            'visibility' => 'public',
         ],
         'admin' => [
             'driver' => 'local',
-            'root' => public_path('uploads'),
+            'root' => storage_path('app/public/admin/uploads'),
             'visibility' => 'public',
-            'url' => env('APP_URL').'/uploads',
+            'url' => env('APP_URL').'/storage/admin/uploads',
         ],
         's3' => [
             'driver' => 's3',

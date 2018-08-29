@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Encore\Admin\Reporter\Reporter;
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Testing\HttpException;
 
@@ -52,5 +53,14 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()) {
+            $response = ['code' => '401', 'message' => '授权令牌无效或已过期！请重新登录！'];
+            return response()->json($response,401);
+        }
+        return redirect()->guest('login');
     }
 }

@@ -11,7 +11,7 @@ class Goods extends Model
         'shop_id',
         'name',
         'main_pic',
-        'big_pic',
+        'media',
         'description',
         'content',
         'type',
@@ -21,7 +21,9 @@ class Goods extends Model
         'sold',
         'discount_price'
     ];
-
+    protected $hidden = [
+        'shop_id'
+    ];
     protected $table='goods';
 
     public function shop(){

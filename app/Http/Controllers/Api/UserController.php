@@ -125,4 +125,8 @@ class UserController extends Controller
         }
     }
 
+
+    public function detail(Request $request){
+        return $this->sendSuccessMsg('',$request->user());
+    }
 }

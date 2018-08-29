@@ -11,9 +11,11 @@ use Laravel\Passport\Token;
 use Illuminate\Support\Facades\DB;
 use \Exception;
 
+use App\Http\Controllers\Api\Message;
 
 class AuthController extends Controller
 {
+    use Message;
     /*处理 api登录 */
 
     /**
@@ -23,8 +25,8 @@ class AuthController extends Controller
      *   @SWG\Response(response="default", description="操作成功")
      * )
      */
+
     public function login(Request $request){
-        // return '123';
         $http = new GuzzleHttp\Client;
         $mobile = $request->get('mobile');
         $password = $request->get('password');
@@ -94,12 +96,5 @@ class AuthController extends Controller
     public function cleanExpiresRefreshToken(){
         $nowtime=date('Y-m-d H:i:s',time());
         $expiresTokens = DB::table('oauth_refresh_tokens')->where('expires_at','<',$nowtime)->delete();
-    }
-
-    public function __construct()
-    {
-        $this->middleware('auth:api')->only([
-            'logout'
-        ]);
     }
 }

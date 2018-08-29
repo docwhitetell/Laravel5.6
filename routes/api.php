@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth:api','cors']],function (){
     Route::get('/user/bindEmail', 'Api\UserController@getEmailVerifyCode');
     Route::post('/user/bindEmail', 'Api\UserController@bindEmail');
     Route::put('/user', 'Api\UserController@update');
-
+    Route::get('/user', 'Api\UserController@detail');
     /*
      * Upload*/
     Route::post('/upload', 'Api\UploadController@upload');
@@ -43,14 +43,12 @@ Route::group(['middleware' => ['auth:api','cors']],function (){
      * Shop*/
     Route::get('/shop', 'Api\ShopController@index');
     Route::post('/shop', 'Api\ShopController@add');
-    Route::get('/shop/{id}', 'Api\ShopController@detail');
     Route::put('/shop/{id}', 'Api\ShopController@update');
     Route::delete('/shop/{id}', 'Api\ShopController@delete');
     /*
      * 商铺商品列表 */
-    Route::get('/shop/{id}/goods', 'Api\GoodsController@index');
     Route::post('/shop/{id}/goods', 'Api\GoodsController@create');
-    Route::get('/shop/{shop_id}/goods/{goods_id}', 'Api\GoodsController@detail');
+
     Route::put('/shop/{shop_id}/goods/{goods_id}', 'Api\GoodsController@update');
     Route::delete('/shop/{shop_id}/goods/{goods_id}', 'Api\GoodsController@delete');
 
@@ -59,7 +57,26 @@ Route::group(['middleware' => ['auth:api','cors']],function (){
     Route::get('/shop/certify/{id}', 'Api\ShopController@certify');
     /* 取消审核 */
     Route::delete('/shop/certify/{id}', 'Api\ShopController@uncertify');
+
+
+    /*
+     * 购物车*/
+    Route::get('/user/shopcar', 'Api\ShopCarController@index');
+    Route::post('/user/shopcar', 'Api\ShopCarController@add');
+
 });
 
+/*
+ * 非授权访问路由
+ * */
+Route::group(['middleware'=>['cors']],function (){
+    Route::get('/shops', 'Api\ShopController@shops');
+
+    Route::get('/shop/{id}', 'Api\ShopController@detail');
+
+    Route::get('/shop/{id}/goods', 'Api\GoodsController@index');
+
+    Route::get('/shop/{shop_id}/goods/{goods_id}', 'Api\GoodsController@detail');
+});
 
 

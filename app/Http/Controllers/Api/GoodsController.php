@@ -37,6 +37,7 @@ class GoodsController extends Controller
     /**
      * @SWG\Get(path="/api/shop/{shop_id}/goods/{goods_id}", tags={"Goods 商品类Api"},summary="商品详情",description="商品详情",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content-Type",default="application/json"),
      *   @SWG\Parameter(in="path",name="shop_id",type="number",description="商店id",required=true),
      *   @SWG\Parameter(in="path",name="goods_id",type="number",description="商品id",required=true),
      *   @SWG\Response(response="default", description="操作成功")
@@ -44,6 +45,7 @@ class GoodsController extends Controller
      */
     public function detail(Request $request, $shop_id, $goodsId){
         $data = Goods::find($goodsId);
+        $data['media']=json_decode($data['media']);
         return $this->sendSuccessMsg('',$data);
     }
 
@@ -52,6 +54,7 @@ class GoodsController extends Controller
     /**
      * @SWG\Post(path="/api/shop/{shop_id}/goods", tags={"Goods 商品类Api"},summary="添加商品",description="添加商品",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content-Type",default="application/json"),
      *   @SWG\Parameter(in="path",name="id",type="number",description="商店id",required=true),
      *   @SWG\Parameter(in="formData",name="name",type="string",description="商品名称",required=true),
      *   @SWG\Parameter(in="formData",name="main_pic",type="string",description="商品主图",required=true),
@@ -76,6 +79,11 @@ class GoodsController extends Controller
         }
 
         $data = $request->all();
+        try{
+            $data['media'] = json_encode($data['media']);
+        }catch(Exception $e){
+            return $this->sendErrorMsg('数据错误！（'.$e->getMessage().')');
+        }
         $data['shop_id']=$shopId;
         $validator = $this->goodsValidator($data);
         if($validator->fails()){
@@ -94,7 +102,7 @@ class GoodsController extends Controller
     /**
      * @SWG\Put(path="/api/shop/{shop_id}/goods", tags={"Goods 商品类Api"},summary="更新商品",description="更新商品",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
-     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content-Type",default="application/x-www-form-urlencoded"),
+     *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content-Type",default="application/json"),
      *   @SWG\Parameter(in="path",name="id",type="number",description="商店id",required=true),
      *   @SWG\Parameter(in="formData",name="name",type="string",description="商品名称",required=true),
      *   @SWG\Parameter(in="formData",name="main_pic",type="string",description="商品主图",required=true),
@@ -111,6 +119,7 @@ class GoodsController extends Controller
      * )
      */
     public function update(Request $request, $shopId, $goodId){
+        //return $request->getContent();
         // return ['user_id'=>$request->user()->id,'shop_id'=>(Integer)$shopId, 'goodsId'=>(Integer)$goodId];
         if($this->isIllegal($request->user(),$shopId, $goodId)){
             return $this->sendErrorMsg('非法操作！这不是您的商铺或商品！');
@@ -119,6 +128,12 @@ class GoodsController extends Controller
         if(!$goods){return $this->sendErrorMsg('该商品不存在！');}
 
         $data = $request->all();
+        try{
+            $data['media'] = json_encode($data['media']);
+        }catch(Exception $e){
+            return $this->sendErrorMsg('数据错误！（'.$e->getMessage().')');
+        }
+
         $validator = $this->goodsValidator($data);
         if($validator->fails()){
             return $this->sendErrorMsg($validator->errors());
@@ -166,7 +181,6 @@ class GoodsController extends Controller
             [
                 'name' => 'required',
                 'main_pic' => 'required',
-                'big_pic' => 'nullable',
                 'description'=>'nullable',
                 'content'=>'nullable',
                 'status'=>'required',

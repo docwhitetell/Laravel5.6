@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use function Psy\sh;
+
 
 class ShopController extends Controller
 {
@@ -27,6 +27,11 @@ class ShopController extends Controller
      */
     public function index(Request $request){
         return ['error'=> true, 'status'=>200 , 'data'=> $request->user()->myShops];
+    }
+
+    public function shops(Request $request){
+        $data = Shop::paginate(20);
+        return $this->sendSuccessMsg('查询成功',$data);
     }
     /*
      * 增加我的商店*/
@@ -46,12 +51,16 @@ class ShopController extends Controller
     public function add(Request $request){
         $user = $request->user();
         $data = $request->all();
+        if(!$this->checkUserCertify($user)){
+            return $this->sendErrorMsg('请先先进行用户实名认证！',null);
+        }
         $validator = $this->shopValidator($data);
         if($validator->fails()){
             return $this->sendValidateErrorMsg($validator);
         }
         try{
-            $shop = $this->create($data,$user->id);
+            $data['user_id'] = $user->id;
+            $shop = $this->create($data);
             return $this->sendSuccessMsg('创建成功！',$shop);
         }catch(\Exception $e){
             return $this->sendSqlErrorMsg($e);
@@ -223,18 +232,9 @@ class ShopController extends Controller
         }
     }
 
-    public function create($data,$uId) {
-        if(!$data|| !$uId) {return false;}
-        return Shop::create([
-            'user_id' => $uId,
-            'name'=>$data['name'],
-            'logo'=>$data['logo'],
-            'location'=>$data['location'],
-            'type'=>$data['location'],
-            'description'=>$data['description'],
-            'open_at'=>$data['open_at'],
-            'close_at'=>$data['close_at']
-        ]);
+    public function create($data) {
+        if(!$data) {return false;}
+        return Shop::create($data);
     }
 
     public function shopValidator(array $data, $id=null){
@@ -244,8 +244,8 @@ class ShopController extends Controller
                 'name' => $id ? ['required', Rule::unique('shops')->ignore($id)] : 'required|unique:shops',
                 'logo' => 'required',
                 'location' => 'required|string',
-                'type'=>'nullable',
-                'description'=>'nullable',
+                'type'=>'required',
+                //'description'=>'nullable',
                 'open_at'=>'required',
                 'close_at'=>'required',
             ],
@@ -268,6 +268,18 @@ class ShopController extends Controller
         else{
             return true;
         }
+    }
+
+
+    protected function checkUserCertify($user) {
+        if(!$user){
+            return false;
+        }
+
+        if(!$user->myCertify->first()){
+            return false;
+        }
+        return $user->myCertify->first()->certificated;
     }
 
 }

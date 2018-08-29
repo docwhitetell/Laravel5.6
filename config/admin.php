@@ -70,10 +70,10 @@ return [
 
         'disk' => 'admin',
 
-        'directory' => [
+       /* 'directory' => [
             'image' => 'images',
             'file'  => 'files',
-        ],
+        ],*/
     ],
 
     /*

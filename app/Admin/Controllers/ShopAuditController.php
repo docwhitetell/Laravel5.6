@@ -84,7 +84,6 @@ class ShopAuditController extends Controller
             $grid->actions(function ($actions) {
                 $actions->disableDelete();
                 $actions->disableEdit();
-                $actions->getKey('id');
                 //$actions->disableView();
                 $actions->append('<a href=""><i class="fa fa-eye"></i></a>');
 
@@ -138,8 +137,8 @@ class ShopAuditController extends Controller
         if(count($ids)===0){
             return $this->sendErrorMsg('无操作');
         }
-        foreach (ShopCertify::find($request->get('ids')) as $certify) {
-            $shop = Shop::find($certify->shop_id);
+        foreach (Shop::find($request->get('ids')) as $shop) {
+            $certify = $shop->certification->where('approve','正在审核')->first();
             if ((Integer)$action === 1) {
                 $certify->approve = "通过审核";
                 try{

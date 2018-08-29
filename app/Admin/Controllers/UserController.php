@@ -82,6 +82,11 @@ class UserController extends Controller
             $grid->avatar('头像');
             $grid->created_at('创建时间');
             $grid->updated_at('最近更新');
+            $grid->column('myCertify.certificated','是否完成实名认证')->display(function ($certificated){
+                return $certificated
+                    ? "<span style='background-color:#52c41a;padding: 6px 10px; border-radius: 4px; color: white;'>已完成</span>"
+                    :"<span style='background-color:#ff4d4f;padding: 6px 10px; border-radius: 4px; color: white;'>未完成</span>";
+            });
         });
     }
 
