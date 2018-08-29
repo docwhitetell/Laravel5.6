@@ -22,7 +22,7 @@ class UserController extends Controller
     private $code_length = 6;
 
     /**
-     * @SWG\Get(path="/api/user/bindEmail", tags={"User"},summary="获得邮箱验证码",description="邮箱验证码",operationId="",produces={"application/json"},
+     * @SWG\Get(path="/api/user/bindEmail", tags={"User 用户"},summary="获得邮箱验证码",description="邮箱验证码",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
      *   @SWG\Parameter(in="header",name="Content-Type",type="string",required=true,default="application/json"),
      *   @SWG\Parameter(in="path",name="email",type="string",description="邮箱",required=true),
@@ -47,7 +47,7 @@ class UserController extends Controller
     }
 
     /**
-     * @SWG\Post(path="/api/user/bindEmail", tags={"User"},summary="绑定邮箱",description="绑定邮箱",operationId="",produces={"application/json"},
+     * @SWG\Post(path="/api/user/bindEmail", tags={"User 用户"},summary="绑定邮箱",description="绑定邮箱",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
      *   @SWG\Parameter(in="header",name="Content-Type",type="string",required=true,default="application/json"),
      *   @SWG\Parameter(in="formData",name="code",type="string",description="邮箱验证码",required=true),
@@ -100,7 +100,7 @@ class UserController extends Controller
     }
 
     /**
-     * @SWG\Put(path="/api/user", tags={"User"},summary="更新用户信息",description="更新",operationId="",produces={"application/json"},
+     * @SWG\Put(path="/api/user", tags={"User 用户"},summary="更新用户信息",description="更新",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
      *   @SWG\Parameter(in="header",name="Content-Type",type="string",required=true,default="application/json"),
      *   @SWG\Parameter(in="formData",name="name",type="string",description="新的用户昵称",required=true),

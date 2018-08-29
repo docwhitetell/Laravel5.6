@@ -21,7 +21,7 @@ class ShopCarController extends Controller
     /*
     * 我的购物车列表 */
     /**
-     * @SWG\Get(path="/api/user/shopcar", tags={"Shop 商店类Api"},summary="我的商店",description="商店列表",operationId="",produces={"application/json"},
+     * @SWG\Get(path="/api/user/shopcar", tags={"User 用户"},summary="我的购物车",description="我的购物车",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
      *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
      *   @SWG\Response(response="default", description="操作成功")
@@ -59,7 +59,7 @@ class ShopCarController extends Controller
     /*
     * 更新购物车列表 */
     /**
-     * @SWG\Post(path="/api/user/shopcar", tags={"Shop 商店类Api"},summary="我的商店",description="商店列表",operationId="",produces={"application/json"},
+     * @SWG\Post(path="/api/user/shopcar", tags={"User 用户"},summary="更新购物车",description="更新购物车",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
      *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
      *   @SWG\Response(response="default", description="操作成功")

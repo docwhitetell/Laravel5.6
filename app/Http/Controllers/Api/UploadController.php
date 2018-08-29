@@ -12,7 +12,7 @@ use \Exception;
 class UploadController extends Controller
 {
     /**
-     * @SWG\post(path="/api/upload", tags={"User"},summary="更新用户信息",description="更新",operationId="",produces={"application/json"},
+     * @SWG\post(path="/api/upload", tags={"Upload 文件上传"},summary="更新用户信息",description="更新",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
      *   @SWG\Parameter(in="formData",name="file",type="file",description="用户头像",required=false),
      *   @SWG\Response(response="default", description="操作成功")

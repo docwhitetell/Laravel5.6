@@ -419,10 +419,10 @@
         "/api/user/shopcar": {
             "get": {
                 "tags": [
-                    "Shop \u5546\u5e97\u7c7bApi"
+                    "User \u7528\u6237"
                 ],
-                "summary": "\u6211\u7684\u5546\u5e97",
-                "description": "\u5546\u5e97\u5217\u8868",
+                "summary": "\u6211\u7684\u8d2d\u7269\u8f66",
+                "description": "\u6211\u7684\u8d2d\u7269\u8f66",
                 "operationId": "",
                 "produces": [
                     "application/json"
@@ -452,10 +452,10 @@
             },
             "post": {
                 "tags": [
-                    "Shop \u5546\u5e97\u7c7bApi"
+                    "User \u7528\u6237"
                 ],
-                "summary": "\u6211\u7684\u5546\u5e97",
-                "description": "\u5546\u5e97\u5217\u8868",
+                "summary": "\u66f4\u65b0\u8d2d\u7269\u8f66",
+                "description": "\u66f4\u65b0\u8d2d\u7269\u8f66",
                 "operationId": "",
                 "produces": [
                     "application/json"
@@ -892,7 +892,7 @@
         "/api/upload": {
             "post": {
                 "tags": [
-                    "User"
+                    "Upload \u6587\u4ef6\u4e0a\u4f20"
                 ],
                 "summary": "\u66f4\u65b0\u7528\u6237\u4fe1\u606f",
                 "description": "\u66f4\u65b0",
@@ -926,7 +926,7 @@
         "/api/user/bindEmail": {
             "get": {
                 "tags": [
-                    "User"
+                    "User \u7528\u6237"
                 ],
                 "summary": "\u83b7\u5f97\u90ae\u7bb1\u9a8c\u8bc1\u7801",
                 "description": "\u90ae\u7bb1\u9a8c\u8bc1\u7801",
@@ -965,7 +965,7 @@
             },
             "post": {
                 "tags": [
-                    "User"
+                    "User \u7528\u6237"
                 ],
                 "summary": "\u7ed1\u5b9a\u90ae\u7bb1",
                 "description": "\u7ed1\u5b9a\u90ae\u7bb1",
@@ -1020,7 +1020,7 @@
         "/api/user": {
             "put": {
                 "tags": [
-                    "User"
+                    "User \u7528\u6237"
                 ],
                 "summary": "\u66f4\u65b0\u7528\u6237\u4fe1\u606f",
                 "description": "\u66f4\u65b0",
