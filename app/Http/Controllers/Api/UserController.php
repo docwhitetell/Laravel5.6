@@ -22,28 +22,29 @@ class UserController extends Controller
     private $code_length = 6;
 
     /**
-     * @SWG\Get(path="/api/user/bindEmail", tags={"User 用户"},summary="获得邮箱验证码",description="邮箱验证码",operationId="",produces={"application/json"},
+     * @SWG\Get(path="/api/emailCode", tags={"User 用户"},summary="获得邮箱验证码",description="邮箱验证码",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
      *   @SWG\Parameter(in="header",name="Content-Type",type="string",required=true,default="application/json"),
-     *   @SWG\Parameter(in="path",name="email",type="string",description="邮箱",required=true),
+     *   @SWG\Parameter(in="query",name="email",type="string",description="邮箱",required=true),
      *   @SWG\Response(response="default", description="操作成功")
      * )
      */
     public function getEmailVerifyCode(Request $request){
         $email = $request->get('email');
-        if(!$email){return ['message'=>'邮箱地址不应为空！', 'error' => true ,'status' => 500];}
+        if(!$email){return $this->sendErrorMsg('邮箱地址不应为空！');}
         $user = $request->user();
         $code = str_pad(random_int(1, 999999), $this->code_length, 0, STR_PAD_LEFT);
-        try{
-            Mail::to($request->get('email'))->send(new OrderShipped('emails.EmailCode', ['code'=>$code]));
-        }catch(Exception $e){
-            return ['message'=>'验证码发送失败！', 'error' => $e->getMessage(), 'status' => 500];
-        }
         $key = 'EmailVerificationCode_' . str_random(15);
         $expiredAt = now()->addMinutes(10);
-        // 缓存验证码 10 分钟过期。
+        try{
+            Mail::to($email)->send(new OrderShipped('emails.EmailCode', ['code'=>$code]));
+        }
+        catch (Exception $e){
+            return $this->sendErrorMsg($e->getMessage());
+        }
+
         Cache::put($key, ['email' => $email, 'code'=> $code, 'user_id' => $user->id], $expiredAt);
-        return ['message'=>'验证码已发生到您的邮箱！请查收！', 'error' => false, 'code' => $code, 'key'=> $key, 'status' => 200];
+        return $this->sendSuccessMsg('验证码已发生到您的邮箱！请查收！',['code'=>$code, 'key'=> $key]);
     }
 
     /**

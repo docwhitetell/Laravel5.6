@@ -88,7 +88,7 @@ return [
 
     'username' => '510559413@qq.com',
 
-    'password' => 'yumyaiggbhwbbgef',
+    'password' => 'ddxctqtxwhgbbhci',
 
     /*
     |--------------------------------------------------------------------------

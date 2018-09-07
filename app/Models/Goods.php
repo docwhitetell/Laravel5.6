@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Goods extends Model
 {
-    //
     protected $fillable=[
         'shop_id',
         'name',
@@ -21,12 +20,15 @@ class Goods extends Model
         'sold',
         'discount_price'
     ];
-    protected $hidden = [
-        'shop_id'
-    ];
+
+    protected $hidden = [];
+
     protected $table='goods';
 
     public function shop(){
         return $this->belongsTo('App\Models\Shop');
+    }
+    public function shopCar(){
+        return $this->belongsToMany('App\Models\ShopCar');
     }
 }

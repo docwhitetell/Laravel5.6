@@ -73,7 +73,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Shop');
     }
 
-    public function myShopCar(){
-        return $this->hasOne('App\Models\ShopCar');
+    public function myShopCars(){
+        return $this->hasMany('App\Models\ShopCar');
     }
 }

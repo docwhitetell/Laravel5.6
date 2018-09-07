@@ -26,15 +26,18 @@ Route::get('/performance', function () {
 /*
  * 授权访问路由 */
 Route::group(['middleware' => ['auth:api','cors']],function (){
+
     /*
      * User*/
     Route::get('/userinfo', function (Request $request) {
         return $request->user()->myInfo;
     });
-    Route::get('/user/bindEmail', 'Api\UserController@getEmailVerifyCode');
-    Route::post('/user/bindEmail', 'Api\UserController@bindEmail');
+
     Route::put('/user', 'Api\UserController@update');
     Route::get('/user', 'Api\UserController@detail');
+    Route::get('/user/bindEmail', 'Api\UserController@getEmailVerifyCode');
+    Route::post('/user/bindEmail', 'Api\UserController@bindEmail');
+
     /*
      * Upload*/
     Route::post('/upload', 'Api\UploadController@upload');
@@ -62,7 +65,8 @@ Route::group(['middleware' => ['auth:api','cors']],function (){
     /*
      * 购物车*/
     Route::get('/user/shopcar', 'Api\ShopCarController@index');
-    Route::post('/user/shopcar', 'Api\ShopCarController@update');
+    Route::get('/user/shopcar/{shop_id}', 'Api\ShopCarController@detail');
+    Route::post('/user/shopcar', 'Api\ShopCarController@add');
 
 });
 

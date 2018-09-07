@@ -923,7 +923,7 @@
                 }
             }
         },
-        "/api/user/bindEmail": {
+        "/api/emailCode": {
             "get": {
                 "tags": [
                     "User \u7528\u6237"
@@ -951,7 +951,7 @@
                     },
                     {
                         "name": "email",
-                        "in": "path",
+                        "in": "query",
                         "description": "\u90ae\u7bb1",
                         "required": true,
                         "type": "string"
@@ -962,7 +962,9 @@
                         "description": "\u64cd\u4f5c\u6210\u529f"
                     }
                 }
-            },
+            }
+        },
+        "/api/user/bindEmail": {
             "post": {
                 "tags": [
                     "User \u7528\u6237"

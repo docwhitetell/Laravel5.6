@@ -16,7 +16,7 @@ class CreateShopCarTable extends Migration
         Schema::create('shop_car', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->comment('用户id');
-            $table->json('goods_ids')->comment('商品id');
+            $table->integer('shop_id')->comment('商店id');
             $table->timestamps();
         });
     }

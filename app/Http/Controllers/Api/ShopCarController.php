@@ -29,33 +29,20 @@ class ShopCarController extends Controller
      */
     public function index(Request $request){
         $user = $request->user();
-        $shopCar = $user->myShopCar;
-        if(count($shopCar) === 0){
-            return $this->sendSuccessMsg('您的购物车是空的！',null);
-        }
-
-        $Ids = $shopCar->goods_ids ? json_decode($shopCar->goods_ids) : array();
-        $goods = [];
-        if(count($Ids) === 0) {
-            return $this->sendSuccessMsg('您的购物车是空的！',null);
-        }
-
-        foreach ($Ids as $goodsId){
-            $goodsDetail = Goods::find($goodsId);
-            if(!$goodsDetail){
-                break;
-            }
-            try{
-                $goodsDetail['media'] = json_decode($goodsDetail['media']);
-            }catch(Exception $e){
-                return $this->sendErrorMsg('数据错误！（'.$e->getMessage().')');
-            }
-            $goodsDetail->shop = $goodsDetail->shop;
-            array_push($goods,$goodsDetail);
-        }
-        return $this->sendSuccessMsg('', $goods);
+        $shopCarsGroup = $user->myShopCars->groupBy('shop_id');
+        $data = $this->getGoodsGroupByShop($shopCarsGroup);
+        return $data;
     }
 
+
+
+    public function detail(Request $request, $shopId) {
+        $user = $request->user();
+        $cars = $user->myShopCars->where('shop_id', $shopId);
+        $shop = Shop::find($shopId);
+        $goodsList = $this->getGoodsListFromShopCar($cars);
+        return $this->sendSuccessMsg('',['shop'=>$shop, 'goods'=>$goodsList]);
+    }
     /*
     * 更新购物车列表 */
     /**
@@ -66,39 +53,37 @@ class ShopCarController extends Controller
      * )
      */
     public function update(Request $request){
-        $user = $request->user();
-        if(empty($request->get('goods'))){
-            return $this->sendErrorMsg('goods字段为空或字段不存在！');
-        }
 
-        $data = $request->all();
-        $data['goods']=json_encode($data['goods']);
-        $validator =  Validator::make(
-            $request->all(),
-            [
-                'goods'=>'required|array'
-            ],
-            [
-                "goods.required"=>'无修改！',
-                "goods.json"=>'数据格式必须json！',
-            ]);
-        if($validator->fails()){
-            return $this->sendValidateErrorMsg($validator);
-        }
-
-        if(count($user->myShopCar) === 0){
-            $myShopCar = new ShopCar(['user_id'=>$user->id]);
-        }else{
-            $myShopCar = $user->myShopCar;
-        }
-        try{
-            $myShopCar->goods_ids = $data['goods'];
-            $user->myShopCar()->save($myShopCar);
-            return $this->sendSuccessMsg('购物车修改成功！');
-        }
-        catch (Exception $e){
-            return $this->sendSuccessMsg($e);
-        }
     }
 
+    public function add(Request $request){
+
+    }
+
+    public function delete(Request $request){
+
+    }
+
+    /*
+     * 返回与传入参数ShopCar列表， 对应的商品列表 */
+    protected function getGoodsListFromShopCar($cars = array())
+    {
+        $goodsList = [];
+        foreach ($cars as $car){
+            array_push($goodsList, $car->goods);
+        }
+        return $goodsList;
+    }
+
+    /*
+     * 以相同商店的商品为一组， 返回归档过的商品列表 */
+    protected function getGoodsGroupByShop($carsGroups){
+        $data = [];
+        foreach ($carsGroups as $group){
+            $shop = Shop::find($group->first()->shop_id);
+            $goodsList = $this->getGoodsListFromShopCar($group);
+            array_push($data, ['shop'=>$shop, 'goods'=>$goodsList]);
+        }
+        return $data;
+    }
 }

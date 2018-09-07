@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use GuzzleHttp;
@@ -36,6 +37,7 @@ class AuthController extends Controller
             // 认证通过...
 /*            $this->cleanExpiresAccessToken();
             $this->cleanExpiresRefreshToken();*/
+            $user = User::where('mobile',$mobile)->select(['id', 'name', 'avatar'])->first();
             $data = null;
             try{
                 $response = $http->post(env('APP_URL').'/oauth/token', [
@@ -50,11 +52,9 @@ class AuthController extends Controller
                 ]);
                 $data=json_decode((string) $response->getBody(), true);
             }catch(Exception $e){
-                $msg = $e->getMessage();
-                return ['error'=>true, 'message'=>$msg];
+                return $this->sendErrorMsg($e->getMessage());
             }
-
-            return response()->json($data);
+            return response()->json(['error'=> false, 'auth' => $data, 'user'=> $user]);
         }else{
             return response()->json(['error'=>'Mobile Number or Password not Match!'],200);
         }
