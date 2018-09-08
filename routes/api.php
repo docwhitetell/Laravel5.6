@@ -65,9 +65,10 @@ Route::group(['middleware' => ['auth:api','cors']],function (){
     /*
      * 购物车*/
     Route::get('/user/shopcar', 'Api\ShopCarController@index');
-    Route::get('/user/shopcar/{shop_id}', 'Api\ShopCarController@detail');
+    Route::get('/user/shopcar/{shop_id}', 'Api\ShopCarController@detail');  // 查看用户关于指定 商铺的 购物车
     Route::post('/user/shopcar', 'Api\ShopCarController@add');
-
+    Route::put('/user/shopcar', 'Api\ShopCarController@update');
+    Route::delete('/user/shopcar/{shop_car_id}', 'Api\ShopCarController@delete');
 });
 
 /*

@@ -450,12 +450,164 @@
                     }
                 }
             },
+            "put": {
+                "tags": [
+                    "User \u7528\u6237"
+                ],
+                "summary": "\u6dfb\u52a0\u5546\u54c1\u5230\u8d2d\u7269\u8f66",
+                "description": "\u6dfb\u52a0\u5230\u8d2d\u7269\u8f66",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content_type",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
+                    },
+                    {
+                        "name": "shop_id",
+                        "in": "formData",
+                        "description": "\u5e97\u94faid",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "goods_id",
+                        "in": "formData",
+                        "description": "\u5546\u54c1id",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "amount",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u6570\u91cf",
+                        "required": true,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "User \u7528\u6237"
                 ],
-                "summary": "\u66f4\u65b0\u8d2d\u7269\u8f66",
-                "description": "\u66f4\u65b0\u8d2d\u7269\u8f66",
+                "summary": "\u6dfb\u52a0\u5546\u54c1\u5230\u8d2d\u7269\u8f66",
+                "description": "\u6dfb\u52a0\u5230\u8d2d\u7269\u8f66",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content_type",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
+                    },
+                    {
+                        "name": "shop_id",
+                        "in": "formData",
+                        "description": "\u5e97\u94faid",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "goods_id",
+                        "in": "formData",
+                        "description": "\u5546\u54c1id",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "amount",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u6570\u91cf",
+                        "required": true,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/api/user/shopcar/{shop_id}": {
+            "get": {
+                "tags": [
+                    "User \u7528\u6237"
+                ],
+                "summary": "\u5173\u4e8eid\u4e3ashop_id\u7684\u5546\u94fa\uff0c\u6211\u7684\u8d2d\u7269\u8f66",
+                "description": "\u6211\u7684\u8d2d\u7269\u8f66",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content_type",
+                        "required": true,
+                        "type": "string",
+                        "default": "application/json"
+                    },
+                    {
+                        "name": "shop_id",
+                        "in": "path",
+                        "description": "\u5546\u94faid",
+                        "required": true,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "\u64cd\u4f5c\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/api/user/shopcar/{shop_car_id}": {
+            "delete": {
+                "tags": [
+                    "User \u7528\u6237"
+                ],
+                "summary": "\u6dfb\u52a0\u5546\u54c1\u5230\u8d2d\u7269\u8f66",
+                "description": "\u6dfb\u52a0\u5230\u8d2d\u7269\u8f66",
                 "operationId": "",
                 "produces": [
                     "application/json"
