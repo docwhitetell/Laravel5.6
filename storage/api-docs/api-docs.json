@@ -421,7 +421,7 @@
                 "tags": [
                     "User \u7528\u6237"
                 ],
-                "summary": "\u6211\u7684\u8d2d\u7269\u8f66",
+                "summary": "\u6211\u7684\u8d2d\u7269\u8f66\uff08\u6240\u6709\u5546\u94fa\uff09",
                 "description": "\u6211\u7684\u8d2d\u7269\u8f66",
                 "operationId": "",
                 "produces": [
@@ -454,8 +454,8 @@
                 "tags": [
                     "User \u7528\u6237"
                 ],
-                "summary": "\u6dfb\u52a0\u5546\u54c1\u5230\u8d2d\u7269\u8f66",
-                "description": "\u6dfb\u52a0\u5230\u8d2d\u7269\u8f66",
+                "summary": "\u66f4\u65b0\u8d2d\u7269\u8f66\u8bb0\u5f55",
+                "description": "\u66f4\u65b0\u8d2d\u7269\u8f66\u8bb0\u5f55",
                 "operationId": "",
                 "produces": [
                     "application/json"
@@ -606,8 +606,8 @@
                 "tags": [
                     "User \u7528\u6237"
                 ],
-                "summary": "\u6dfb\u52a0\u5546\u54c1\u5230\u8d2d\u7269\u8f66",
-                "description": "\u6dfb\u52a0\u5230\u8d2d\u7269\u8f66",
+                "summary": "\u5220\u9664\u6307\u5b9a\u8d2d\u7269\u8f66\u8bb0\u5f55",
+                "description": "\u5220\u9664\u6307\u5b9a\u8d2d\u7269\u8f66\u8bb0\u5f55",
                 "operationId": "",
                 "produces": [
                     "application/json"

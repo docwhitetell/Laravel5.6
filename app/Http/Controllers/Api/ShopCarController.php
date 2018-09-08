@@ -95,7 +95,7 @@ class ShopCarController extends Controller
     /*
     * 更新购物车 */
     /**
-     * @SWG\Put(path="/api/user/shopcar", tags={"User 用户"},summary="添加商品到购物车",description="添加到购物车",operationId="",produces={"application/json"},
+     * @SWG\Put(path="/api/user/shopcar", tags={"User 用户"},summary="更新购物车记录",description="更新购物车记录",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
      *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
      *   @SWG\Parameter(in="formData",name="shop_id",type="number",description="店铺id",required=true),
@@ -148,7 +148,7 @@ class ShopCarController extends Controller
     /*
     * 删除购物车记录 */
     /**
-     * @SWG\Delete(path="/api/user/shopcar/{shop_car_id}", tags={"User 用户"},summary="添加商品到购物车",description="添加到购物车",operationId="",produces={"application/json"},
+     * @SWG\Delete(path="/api/user/shopcar/{shop_car_id}", tags={"User 用户"},summary="删除指定购物车记录",description="删除指定购物车记录",operationId="",produces={"application/json"},
      *   @SWG\Parameter(in="header",name="Authorization",type="string",description="Token",required=true),
      *   @SWG\Parameter(in="header",name="Content-Type",type="string",description="Content_type",required=true, default="application/json"),
      *   @SWG\Response(response="default", description="操作成功")
