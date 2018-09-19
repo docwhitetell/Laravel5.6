@@ -54,9 +54,9 @@ class AuthController extends Controller
             }catch(Exception $e){
                 return $this->sendErrorMsg($e->getMessage());
             }
-            return response()->json(['error'=> false, 'auth' => $data, 'user'=> $user]);
+            return response()->json(['error'=> false, 'data' => ['auth'=>$data, 'user'=>$user] , 'message'=>'']);
         }else{
-            return response()->json(['error'=>'Mobile Number or Password not Match!'],200);
+            return response()->json(['error'=> false, "message" => 'Mobile Number or Password not Match!', 'data'=>null],200);
         }
 
     }
