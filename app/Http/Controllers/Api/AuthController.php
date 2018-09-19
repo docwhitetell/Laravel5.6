@@ -56,7 +56,7 @@ class AuthController extends Controller
             }
             return response()->json(['error'=> false, 'data' => ['auth'=>$data, 'user'=>$user] , 'message'=>'']);
         }else{
-            return response()->json(['error'=> false, "message" => 'Mobile Number or Password not Match!', 'data'=>null],200);
+            return response()->json(['error'=> true, "message" => 'Mobile Number or Password not Match!', 'data'=>null],200);
         }
 
     }
